@@ -25,7 +25,16 @@ function App() {
       },
       body: JSON.stringify(newUser)
     })
-      .then()
+      .then(res => res.json())
+      .then(data => {
+        console.log(data)
+        const addedUser = data;
+        const newUsers = [...users, addedUser];
+        setUsers(newUsers);
+      })
+
+    nameRef.current.value = '';
+    emailRef.current.value = '';
 
     e.preventDefault();
   }
@@ -43,7 +52,7 @@ function App() {
 
       <ul>
         {
-          users.map(user => <li key={user.id}>{user.name} : {user.email}</li>)
+          users.map(user => <li key={user.id}>{user.id}:{user.name} : {user.email}</li>)
         }
       </ul>
     </div>
